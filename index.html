@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
+        <link type="text/css" rel="stylesheet" href="style.css">
+        <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+        <title>Budgety</title>
+    </head>
+    <body>
+        
+        <div class="top">
+            <div class="budget">
+                <div class="budget__title">
+                    Dinheiro disponível em <span class="budget__title--month">%Month%</span>:
+                </div>
+                
+                <div class="budget__value">+ 2,345.64</div>
+                
+                <div class="budget__receita clearfix">
+                    <div class="budget__receita--text">receita</div>
+                    <div class="right">
+                        <div class="budget__receita--value">+ 4,300.00</div>
+                        <div class="budget__receita--percentage">&nbsp;</div>
+                    </div>
+                </div>
+                
+                <div class="budget__despesas clearfix">
+                    <div class="budget__despesas--text">despesas</div>
+                    <div class="right clearfix">
+                        <div class="budget__despesas--value">- 1,954.36</div>
+                        <div class="budget__despesas--percentage">45%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom">
+            <div class="add">
+                <div class="add__container">
+                    <select class="add__type">
+                        <option value="ganh" selected>+</option><!--Ganha-->
+                        <option value="gast">-</option><!--Gasta-->
+                    </select>
+                    <input type="text" class="add__description" placeholder="Add description">
+                    <input type="number" class="add__value" placeholder="Value">
+                    <button class="add__btn"><ion-icon name="checkbox-outline"></ion-icon></button>
+                </div>
+            </div>
+            
+            <div class="container clearfix">
+                <div class="receita">
+                    <h2 class="receita__title">receita</h2>
+                    <div class="receita__list"></div>
+                </div>
+                
+                
+                
+                <div class="despesas">
+                    <h2 class="despesas__title">despesas</h2>          
+                    <div class="despesas__list"></div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <script src="app.js"></script>
+    </body>
+</html>
