@@ -1,7 +1,7 @@
 //---Controlador do Dinheiro---//
-var controladorDinheiro = (function(){
+let controladorDinheiro = (function(){
     
-    var Gasto = function(id,descrição,valor){
+    let Gasto = function(id,descrição,valor){
         this.id = id;
         this.descrição = descrição;
         this.valor = valor;
@@ -20,21 +20,21 @@ var controladorDinheiro = (function(){
         return this.porcentagem;
     };
 
-    var Ganho = function(id,descrição,valor){
+    let Ganho = function(id,descrição,valor){
         this.id = id;
         this.descrição = descrição;
         this.valor = valor;
     };
 
-    var calcularTotal = function(tipo){
-        var soma = 0;
+    let calcularTotal = function(tipo){
+        let soma = 0;
         dados.itens[tipo].forEach(function(atual){
             soma += atual.valor;
         });
         dados.total[tipo] = soma;
     };
 
-    var dados = {
+    let dados = {
         itens: {
             gast: [],
             ganh: []
@@ -49,7 +49,7 @@ var controladorDinheiro = (function(){
 
     return{
         addItem: function(tipo,des,val){
-            var novoItem,id;
+            let novoItem,id;
 
             // Criação de novos IDs
             if(dados.itens[tipo].length > 0){
@@ -73,7 +73,7 @@ var controladorDinheiro = (function(){
         },
 
         deleteItem: function(tipo,id){
-            var ids,index;
+            let ids,index;
             
             ids = dados.itens[tipo].map(function(atual){
                 return atual.id;
@@ -107,7 +107,7 @@ var controladorDinheiro = (function(){
         },
 
         receberPorcentagem: function(){
-            var todasPorcent = dados.itens.gast.map(function(atual){
+            let todasPorcent = dados.itens.gast.map(function(atual){
                 return atual.recebePorcent();
             });
             return todasPorcent;
@@ -126,10 +126,10 @@ var controladorDinheiro = (function(){
 })();
 
 //---Controlador da interface---//
-var controladorUI = (function(){
+let controladorUI = (function(){
     
-    var formataNum = function(num,tipo){
-        var numSplit,int,dec;
+    let formataNum = function(num,tipo){
+        let numSplit,int,dec;
 
         num = Math.abs(num);
         num = num.toFixed(2);
@@ -147,8 +147,8 @@ var controladorUI = (function(){
         return (tipo === 'gast' ? '-' : '+') + ' ' + int + '.' + dec;
     };
 
-    var listaNodeForEach = function(lista,callback){
-        for(var i = 0;i < lista.length;i++){
+    let listaNodeForEach = function(lista,callback){
+        for(let i = 0;i < lista.length;i++){
             callback(lista[i],i);
         }
     };
@@ -164,7 +164,7 @@ var controladorUI = (function(){
         },
         
         adicionarItem: function(obj,tipo){
-            var html,novahtml,elemento;
+            let html,novahtml,elemento;
             
             // 1. Criar uma string de HTML com um placeholder
             if(tipo === 'ganh'){
@@ -187,7 +187,7 @@ var controladorUI = (function(){
         },
 
         deleteItemLista: function(idSelecionada){
-            var elemento;
+            let elemento;
 
             elemento = document.getElementById(idSelecionada);
 
@@ -195,7 +195,7 @@ var controladorUI = (function(){
         },
 
         limparTexto: function(){
-            var campos,arrayCampos;
+            let campos,arrayCampos;
             
             campos = document.querySelectorAll('.add__description' + ' , ' + '.add__value');
 
@@ -209,7 +209,7 @@ var controladorUI = (function(){
         },
 
         mostrarGrana: function(obj){
-            var tipo;
+            let tipo;
             
             obj.grana > 0 ? tipo = 'ganh' : tipo = 'gast';
             
@@ -225,7 +225,7 @@ var controladorUI = (function(){
         },
 
         mostrarPorcentagem: function(porcentagens){
-            var prcts;
+            let prcts;
             
             prcts = document.querySelectorAll('.item__percentage');
 
@@ -239,7 +239,7 @@ var controladorUI = (function(){
         },
 
         mostrarMes: function(){
-            var agora,ano,mes,meses;
+            let agora,ano,mes,meses;
             
             meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
 
@@ -251,7 +251,7 @@ var controladorUI = (function(){
         },
 
         mudarTipo: function(){
-            var campos = document.querySelectorAll('.add__type' + ',' + '.add__description' + ',' +'.add__value');
+            let campos = document.querySelectorAll('.add__type' + ',' + '.add__description' + ',' +'.add__value');
             listaNodeForEach(campos,function(atual){
                 atual.classList.toggle('red-focus');
             });
@@ -263,10 +263,10 @@ var controladorUI = (function(){
 })();
 
 //---Controlador central do app---//
-var controladorApp = (function(cntrD,cntrU){
+let controladorApp = (function(cntrD,cntrU){
     // Atualizar os valores
-    var atualizaValores = function(){
-        var grana;
+    let atualizaValores = function(){
+        let grana;
 
         ///1. Calcular o dinheiro total.
         cntrD.calcularGrana();
@@ -277,8 +277,8 @@ var controladorApp = (function(cntrD,cntrU){
     };
     
     // Função que adiciona os valores
-    var cntrAddItem = function(){
-        var valores,novoItem;
+    let cntrAddItem = function(){
+        let valores,novoItem;
         
         ///1. Ler os dados escritos.
         valores = cntrU.lerValores();
@@ -296,8 +296,8 @@ var controladorApp = (function(cntrD,cntrU){
         }
     };
 
-    var cntrDelItem = function(evento){
-        var idItem,idSplit,tipo,id;
+    let cntrDelItem = function(evento){
+        let idItem,idSplit,tipo,id;
 
         idItem = evento.target.parentNode.parentNode.parentNode.parentNode.id;
 
@@ -317,13 +317,13 @@ var controladorApp = (function(cntrD,cntrU){
         }
     };
     
-    var setupEventos = function(){
+    let setupEventos = function(){
         // Usuario clica no icone
         document.querySelector('.add__btn').addEventListener('click',cntrAddItem);
 
         // Usuario pressiona o 'ENTER'
         document.addEventListener('keypress',function(enter){
-            if(enter.keyCode === 13 || enter.which === 13){
+            if(enter.key == 13){
                 cntrAddItem();
             }
         });
@@ -333,8 +333,8 @@ var controladorApp = (function(cntrD,cntrU){
         document.querySelector('.add__type').addEventListener('change',cntrU.mudarTipo);
     };
 
-    var atualizaPorcent = function(){
-        var porcentagens;
+    let atualizaPorcent = function(){
+        let porcentagens;
         
         ///1. Calcular as porcentagens
         cntrD.calcularPorcentagem();
