@@ -323,7 +323,7 @@ let controladorApp = (function(cntrD,cntrU){
 
         // Usuario pressiona o 'ENTER'
         document.addEventListener('keypress',function(enter){
-            if(enter.key == 13){
+            if(enter.key === "Enter"){
                 cntrAddItem();
             }
         });
